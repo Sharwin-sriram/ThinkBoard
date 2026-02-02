@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url(cloud1.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  --opacity: 0.5;
+  background: linear-gradient(
+    180deg,
+    hsla(193, 93%, 89%, var(--opacity)) 5%,
+    hsla(220, 100%, 99%, var(--opacity)) 50%
+  );
+  /* backdrop-filter: blur(8px); */
+  gap: 1em;
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);
+  padding: 2em;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* border: 1px solid black; */
+}
+
+input {
+  background: #eff2f7;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  transition: 0.3s ease;
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+  }
+  &:hover {
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.nameWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.name {
+  position: relative;
+}
+
+label {
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+form button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+form button:hover {
+}

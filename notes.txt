@@ -1,0 +1,11 @@
+npm init -y
+
+-y for yes
+npm i express
+
+mongodb+srv://sharwin:sharwin@cluster0.ekr6eyi.mongodb.net/?appName=Cluster0
+npm i mongoose@7.0.3
+OR
+npm i mongoose@8.14.3
+
+npm i @upstash/ratelimit@2.05@upstash/redis@1.34.9
