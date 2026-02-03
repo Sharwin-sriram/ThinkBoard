@@ -6,13 +6,13 @@ import toast from "react-hot-toast";
 
 export default () => {
   return (
-    <>
+    <div data-theme="forest">
       <button onClick={() => toast.success("Congrats")}>Click</button>
       <Routes>
         <Route path={"/"} element={<HomePage />} />
         <Route path={"/create"} element={<CreatePage />} />
         <Route path={"/note/:id"} element={<NoteDetailsPage />} />
       </Routes>
-    </>
+    </div>
   );
 };
