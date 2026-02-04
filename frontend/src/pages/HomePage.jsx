@@ -1,6 +1,6 @@
 import RateLimiterUI from "@components/RateLimiterUI";
-import Navbar from "@components/Navbar";
 import { useEffect, useState } from "react";
+import Navbar from "@components/Navbar";
 import axios from "axios";
 
 export default () => {
@@ -8,17 +8,35 @@ export default () => {
   const [loading, setLoading] = useState(true);
   const [notes, setNotes] = useState([]);
   useEffect(() => {
-    const fetchNotes = async () => {
+    const fetchnotes = async () => {
       try {
-        const res = axios.fetch("http://localhost:5001/api")
+        const res = await axios.get("http://localhost:5001/api/notes");
+        const data = await res.data;
+        setNotes(data);
       } catch (er) {
-        console.log(er);
+        if (er.status === 429) {
+          setIsRateLimited(true);
+          return;
+        }
+        console.log("Error fetching notes",er);
+      } finally {
+        setLoading(false);
       }
     };
+    fetchnotes();
   }, []);
   return (
     <div className="min-h-screen">
       <Navbar />
+      {loading && <>Loading...</>}
+      {!loading &&
+        notes.map((note) => {
+          const { id, title, content } = note;
+          <div key={id}>
+            <div className="">{title}</div>
+            <div>{content}</div>
+          </div>;
+        })}
       {isRateLimited && <RateLimiterUI />}
     </div>
   );
