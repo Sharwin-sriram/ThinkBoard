@@ -2,7 +2,6 @@ import NoteDetailsPage from "@pages/NoteDetailsPage";
 import { Route, Routes } from "react-router";
 import CreatePage from "@pages/CreatePage";
 import HomePage from "@pages/HomePage";
-import toast from "react-hot-toast";
 
 export default () => {
   return (
