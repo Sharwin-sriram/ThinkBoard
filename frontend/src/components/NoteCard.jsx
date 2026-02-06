@@ -40,7 +40,7 @@ const NoteCard = ({ note, setNotes }) => {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                window.location.href = `/edit/${note._id}`;
+                window.location.href = `/${note._id}`;
               }}
             >
               <PenSquare className="size-4" />

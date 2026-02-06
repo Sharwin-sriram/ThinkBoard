@@ -25,7 +25,7 @@ export default () => {
       }
     };
     fetchNote();
-  });
+  }, [id]);
 
   const handleDelete = async () => {
     try {
@@ -89,6 +89,37 @@ export default () => {
                 <label className="label">
                   <span className="label-text">Title</span>
                 </label>
+                <input
+                  type="text"
+                  placeholder="Note title"
+                  className="input input-bordered"
+                  value={note.title}
+                  onChange={(e) => setNote({ ...note, title: e.target.value })}
+                />
+              </div>
+
+              <div className="form-control mb-4">
+                <label className="label">
+                  <span className="label-text">Content</span>
+                </label>
+                <textarea
+                  placeholder="Write your note here..."
+                  className="textarea textarea-bordered h-32"
+                  value={note.content}
+                  onChange={(e) =>
+                    setNote({ ...note, content: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="card-actions justify-end">
+                <button
+                  className="btn btn-primary"
+                  disabled={saving}
+                  onClick={handleSave}
+                >
+                  {saving ? "Saving..." : "Save Changes"}
+                </button>
               </div>
             </div>
           </div>
