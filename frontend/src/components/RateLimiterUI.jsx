@@ -15,7 +15,7 @@ export default () => {
               moment
             </p>
             <p className="text-sm text-base-content/78">
-              Try again in a few seconds for the best experience
+              Try again in a few seconds
             </p>
           </div>
         </div>

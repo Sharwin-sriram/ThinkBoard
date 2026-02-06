@@ -1,9 +1,9 @@
-import RateLimiterUI from "@components/RateLimiterUI";
 import { useEffect, useState } from "react";
-import Navbar from "@components/Navbar";
-import axios from "axios";
-import toast from "react-hot-toast";
+import RateLimiterUI from "@components/RateLimiterUI";
 import NoteCard from "@components/NoteCard";
+import Navbar from "@components/Navbar";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 export default () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
