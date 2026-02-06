@@ -1,13 +1,13 @@
 import { ArrowLeftIcon } from "lucide-react";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import api from "@lib/axios";
 
 export default () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -23,7 +23,7 @@ export default () => {
       toast.success("Note created successfully");
       navigate("/");
     } catch (er) {
-      if (error.staus === 429) {
+      if (er.staus === 429) {
         toast.error(
           "Slow down you're creating too many notess in a short period of time",
           { duration: 4000 },
@@ -57,6 +57,7 @@ export default () => {
                     type="text"
                     placeholder="Note Title"
                     value={title}
+                    className="input input-bordered"
                     onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
