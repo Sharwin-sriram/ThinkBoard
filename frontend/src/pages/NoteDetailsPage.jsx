@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import api from "@lib/axios";
 import toast from "react-hot-toast";
-import { ArrowLeftIcon, LoaderIcon, Trash2Icon } from "lucide-react";
+import { ArrowLeft, ArrowLeftIcon, LoaderIcon, Trash2Icon } from "lucide-react";
 
 export default () => {
   const [note, setNote] = useState(null);
@@ -27,5 +27,73 @@ export default () => {
     fetchNote();
   });
 
-  return <div></div>;
+  const handleDelete = async () => {
+    try {
+      await api.delete(`/${id}`);
+      navigate("/");
+    } catch (er) {
+      toast.error("Failed to delete note");
+      console.log("Error Deleting Note", er);
+    }
+  };
+
+  const handleSave = async () => {
+    if (!note.title.trim() || !note.content.trim()) {
+      toast.error("Please add a title or content");
+      return;
+    }
+
+    setSaving(true);
+
+    try {
+      await api.put(`/${id}`, note);
+      toast.success("Note updated successfully");
+      navigate("/");
+    } catch (er) {
+      console.log("Error saving the notes", er);
+      toast.error("Failed to update note");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-base-200 flex items-center justify-center">
+        <LoaderIcon className="animate-spin size-10" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-base-200">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-2xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <Link to={"/"} className="btn btn-ghost">
+              <ArrowLeftIcon className="h-5 w-5" />
+              Back to Notes
+            </Link>
+            <button
+              onClick={handleDelete}
+              className="btn btn-error btn-outline"
+            >
+              <Trash2Icon className="h-5 w-5" />
+              Delete note
+            </button>
+          </div>
+
+          <div className="card bg-base-100">
+            <div className="card-body">
+              <div className="form-control mb-4">
+                <label className="label">
+                  <span className="label-text">Title</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
