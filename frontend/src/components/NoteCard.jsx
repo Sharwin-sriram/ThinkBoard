@@ -12,7 +12,7 @@ const NoteCard = ({ note, setNotes }) => {
     if (!window.confirm("Are you sure you want to delete this note?")) return;
 
     try {
-      await api.delete(`/notes/${id}`);
+      await api.delete(`/${id}`);
       setNotes((prev) => prev.filter((note) => note._id !== id)); // get rid of the deleted one
       toast.success("Note deleted successfully");
     } catch (error) {
@@ -32,7 +32,7 @@ const NoteCard = ({ note, setNotes }) => {
         <p className="text-base-content/70 line-clamp-3">{note.content}</p>
         <div className="card-actions justify-between items-center mt-4">
           <span className="text-sm text-base-content/60">
-            {formatDate(new Date(note.createdAt))}
+            {formatDate(note.createdAt)}
           </span>
           <div className="flex items-center gap-1">
             <button
