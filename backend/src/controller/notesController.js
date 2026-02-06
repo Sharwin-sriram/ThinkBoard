@@ -15,6 +15,7 @@ export async function createNote(req, res) {
     const { title, content } = req.body;
     const newNote = new Note({ title, content });
     const savedNote = await newNote.save();
+    console.log("New Note Created");
     res.status(201).json({ savedNote });
   } catch (e) {
     console.log("Error in createNote Controller", e);
@@ -25,7 +26,11 @@ export async function createNote(req, res) {
 export async function getByID(req, res) {
   try {
     const note = await Note.findById(req.params.id);
-    if (!note) return res.status(404).json({ message: "Note not found" });
+    if (!note) {
+      console.log(`Note Not found with id:${req.params.id}`);
+      return res.status(404).json({ message: "Note not found" });
+    }
+    console.log("Note Found");
     res.status(200).json(note);
   } catch (er) {
     console.log("Error in getByID Controller", er);
@@ -44,10 +49,13 @@ export async function updateNote(req, res) {
       },
       {
         new: true,
-      }
+      },
     );
-    if (!updateNote)
+    if (!updateNote) {
+      console.log("Couldn't Update Note: Note not found");
       return res.status(404).json({ message: "The given id does not exist" });
+    }
+    console.log("Note Updated Successfully");
     res.status(200).json({ message: "Note Updated Successfully", updateNote });
   } catch (e) {
     console.log("Error in updateNote Controller", e);
@@ -57,9 +65,11 @@ export async function updateNote(req, res) {
 
 export async function deleteNote(req, res) {
   try {
-    const deleteNote = await Note.findByIdAndDelete(req.params.id);
+    const id = req.params.id;
+    const deleteNote = await Note.findByIdAndDelete(id);
     if (!deleteNote)
       return res.status(404).json({ message: "The given id does not exist" });
+    console.log(`Note with ${id} Deleted successfully`);
     res.status(200).json({ message: "Deleted Successfully", deleteNote });
   } catch (e) {
     console.log("Error in deleteNote Controller", e);
