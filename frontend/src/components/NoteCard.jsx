@@ -1,8 +1,8 @@
-import { PenSquare, Trash2 } from "lucide-react";
+import { PenSquare, Trash2, Trash2Icon } from "lucide-react";
+import { formatDate } from "@lib/utils";
 import { Link } from "react-router";
-import { formatDate } from "../lib/utils";
-import api from "../lib/axios";
 import toast from "react-hot-toast";
+import api from "@lib/axios";
 
 const NoteCard = ({ note, setNotes }) => {
   const handleDelete = async (e, id) => {
@@ -47,10 +47,11 @@ const NoteCard = ({ note, setNotes }) => {
             </button>
 
             <button
+              type="button"
               className="btn btn-ghost btn-xs text-error"
               onClick={(e) => handleDelete(e, note._id)}
             >
-              <Trash2 className="size-4" />
+              <Trash2Icon className="size-4" />
             </button>
           </div>
         </div>
