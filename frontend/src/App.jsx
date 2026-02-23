@@ -10,7 +10,7 @@ export default () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/create" element={<CreatePage />} />
-        <Route path="/note/:id" element={<NoteDetailsPage />} />
+        <Route path="/notes/:id" element={<NoteDetailsPage />} />
       </Routes>
     </div>
   );
