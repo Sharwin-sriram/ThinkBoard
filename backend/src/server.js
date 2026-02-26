@@ -3,8 +3,13 @@ import express from "express";
 import connectDB from "./config/db.js";
 import noteRoutes from "./routes/noteRoutes.js";
 import rateLimiter from "./middleware/rateLimiter.js";
-import path from "path";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Create __filename and __dirname manually
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
